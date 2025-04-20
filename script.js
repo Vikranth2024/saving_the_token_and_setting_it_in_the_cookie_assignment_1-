@@ -1,9 +1,16 @@
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "your_secret_key"; 
+
 const encrypt = (payload) => {
-  // encrypt the payload and return token
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: "7d" });
 };
 
 const decrypt = (token) => {
-  // return decoded payload
+  try {
+    return jwt.verify(token, SECRET_KEY);
+  } catch (err) {
+    return null;
+  }
 };
 
 module.exports = {
